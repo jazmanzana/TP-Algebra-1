@@ -12,9 +12,10 @@ mcdExt _ _ = (0, (0, 0))
 -- Dado un entero, devuelve un conjunto con todos los números primos
 -- menores a él.
 criba :: Integer -> Set Integer
-criba 2 = []
-criba n | esPrimo (n - 1) = criba (n - 1) ++ [(n - 1)]
+criba 0 = []
+criba x | esPrimo (n - 1) = criba (n - 1) ++ [(n - 1)]
         | otherwise = criba (n - 1)
+        where n = abs(x)
 
 --(3)
 coprimoCon:: Integer -> Integer
