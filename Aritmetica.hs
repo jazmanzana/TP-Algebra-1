@@ -13,7 +13,7 @@ mcdExt _ _ = (0, (0, 0))
 -- menores a él.
 criba :: Integer -> Set Integer
 criba 2 = []
-criba n | esPrimo (n - 1) = (n - 1) : criba (n - 1)
+criba n | esPrimo (n - 1) = criba (n - 1) ++ [(n - 1)]
         | otherwise = criba (n - 1)
 
 --(3)
