@@ -6,7 +6,11 @@ import Data.Bits
 
 --(1)
 mcdExt :: Integer -> Integer -> (Integer, (Integer, Integer))
-mcdExt _ _ = (0, (0, 0))
+mcdExt a b | b > a = mcdExt b a
+mcdExt a 0 = (a, 1, 0)
+mcdExt a b = (d, t, s - t*k)
+        where (k, r) = (div a b, mod a b)
+              (d, s, t) = mcdExt b r
 
 --(2)
 -- Dado un entero, devuelve un conjunto con todos los números primos
@@ -14,7 +18,7 @@ mcdExt _ _ = (0, (0, 0))
 criba :: Integer -> Set Integer
 criba 0 = []
 criba x | esPrimo (n - 1) = criba (n - 1) ++ [(n - 1)]
-        | otherwise = criba (n - 1)
+        | otherwise = criba (n -1)
         where n = abs(x)
 
 --(3)
