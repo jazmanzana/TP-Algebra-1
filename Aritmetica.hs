@@ -7,10 +7,10 @@ import Data.Bits
 --(1)
 mcdExt :: Integer -> Integer -> (Integer, (Integer, Integer))
 mcdExt a b | b > a = mcdExt b a
-mcdExt a 0 = (a, 1, 0)
-mcdExt a b = (d, t, s - t*k)
+mcdExt a 0 = (a, (1, 0))
+mcdExt a b = (d, (t, s - t*k))
         where (k, r) = (div a b, mod a b)
-              (d, s, t) = mcdExt b r
+              (d, (s, t)) = mcdExt b r
 
 --(2)
 -- Dado un entero, devuelve un conjunto con todos los números primos
@@ -30,7 +30,7 @@ coprimoCon x = primerCoprimoDesde n (n - 2)
 --(4)
 inversoMultiplicativo :: Integer -> Integer -> Integer
 inversoMultiplicativo a b = s
-                           where (g, s, t) = mcdExt a b
+                           where (g, (s, t)) = mcdExt a b
 
 
 
