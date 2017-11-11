@@ -29,7 +29,9 @@ coprimoCon x = primerCoprimoDesde n (n - 2)
 
 --(4)
 inversoMultiplicativo:: Integer -> Integer -> Integer
-inversoMultiplicativo _ _ = 0
+inversoMultiplicativo :: Integer −> Integer −> Integer
+inversoMultiplicativo a b = s
+                           where (g, s, t) = mcdExt a b
 
 
 
