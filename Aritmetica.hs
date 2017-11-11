@@ -28,8 +28,7 @@ coprimoCon x = primerCoprimoDesde n (n - 2)
      where n = abs(x)
 
 --(4)
-inversoMultiplicativo:: Integer -> Integer -> Integer
-inversoMultiplicativo :: Integer −> Integer −> Integer
+inversoMultiplicativo :: Integer -> Integer -> Integer
 inversoMultiplicativo a b = s
                            where (g, s, t) = mcdExt a b
 
