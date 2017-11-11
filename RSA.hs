@@ -7,7 +7,7 @@ import Aritmetica
 claves :: Integer -> Integer -> (Integer, Integer, Integer)
 claves p q = (e, d, n)
   where n = p*q
-        (e, d) = moduloPhi ((p-1)*(q-1)) ((p-1)*(q-1)) -- llamo con phi dos veces y una lo voy descontando
+        (e, d) = moduloPhi ((p-1)*(q-1)) ((p-1)*(q-1)) -- llamo con phi dos veces, una es mi e que le voy restando 1
 
 -- d es el inverso de e modulo phi = calculo d con inversoMultiplicativo
 -- e es un numero entre 0 y phi que cumpla con la ecuacion de congruencia dada
