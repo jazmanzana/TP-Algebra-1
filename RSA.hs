@@ -22,10 +22,24 @@ esCongruenteAUno a phi | mod a phi == mod 1 phi = True
                        | otherwise = False
 
 
---(6)
-codificador :: Clpub -> Mensaje -> Cifrado
-codificador _ _ = []
+codificador :: ClPub -> Mensaje -> Cifrado
+codificador kPublic mensaje | fst(mcdExt snd(kPublic) (aEnteros mensaje)) == 1 = convertirLista (aEnteros mensaje) kPublic 
+							| otherwise = -(aEnteros mensaje)
 
---(7)
-decodificador :: Clpri -> Cifrado -> Mensaje
-decodificador _ _ = ""
+							
+decodificador :: ClPri -> Cifrado -> Mensaje
+decodificador kPriv mCifrado | mCifrado >= 0 = revertirLista mCifrado ClPri
+							 | otherwise = aChars (- mCifrado) 
+
+							 
+-- funcion auxiliar que recibe el mensaje original y devuelve el mensaje cifrado para el primer caso 
+
+convertirLista :: [Integer] -> ClPub -> [Integer]
+convertirLista [] clave = []
+convertirLista lista clave =  modExp (head lista) fst(clave) snd(clave) : convertirLista (tail lista) clave
+
+-- funcion auxiliar que recibe el mensaje cifrado y devuelve el mensaje original para el primer caso
+
+revertirLista :: Cifrado -> ClPri -> Mensaje
+revertirLista [] kPriv = []
+revertirLista mCifrado kPriv = modExp (head mCifrado) fst(kPriv) snd(kPriv) : convertirLista (tail mCifrado) kPriv
