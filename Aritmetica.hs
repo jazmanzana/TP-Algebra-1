@@ -27,7 +27,12 @@ coprimoCon:: Integer -> Integer
 coprimoCon x = primerCoprimoDesde n (n - 2)
      where n = abs(x)
 
+
 --(4)
+-- El inverso multiplicativo de un número entero `n` módulo `m` es otro
+-- entero `x` (módulo m) tal que x·n ≡ 1 (mod m)
+-- Dados dos números `n` y `m`, otorga el inverso multiplicativo de
+-- `n` módulo `m`
 inversoMultiplicativo :: Integer -> Integer -> Integer
 inversoMultiplicativo a b = s
                            where (g, (s, t)) = mcdExt a b
@@ -39,6 +44,33 @@ modExp :: Integer -> Integer -> Integer -> Integer
 modExp b 0 m = 1
 modExp b e m = t * modExp ((b * b) `mod` m) (shiftR e 1) m `mod` m
   where t = if testBit e 0 then b `mod` m else 1
+
+
+{- Función dosYNaturalesImparesHastaN
+ - Recibe un número `n` y devuelve una lista de números impares menores
+ - a `n`, ordenada de forma decreciente, con el 2 al final.
+ -}
+dosYNaturalesImparesHastaN :: Integer -> [Integer]
+dosYNaturalesImparesHastaN 2 = 2 : []
+dosYNaturalesImparesHastaN n | esMultiplo n 2 == False = dosYNaturalesImparesHastaN (n - 1) ++ [n]
+                             | otherwise = dosYNaturalesImparesHastaN (n - 1)
+
+{- Función esMultiplo
+ - Recibe dos números y devuelve True si el primero es múltiplo del
+ - segundo.
+ -}
+esMultiplo :: Integer -> Integer -> Bool
+esMultiplo numero multiplo = numero `mod` multiplo == 0
+
+{- Función quitar
+ - Dados un elemento y una lista elimina la todas las apariciones del
+ - mismo en ella (de haberla).
+ -}
+quitar :: Integer -> [Integer] -> [Integer]
+quitar _ [] = []
+quitar x (primerElemento:lista) | x == primerElemento = lista
+                                | otherwise = primerElemento:quitar x lista
+
 
 {- Función sumaDivisores - Devuelve la suma de todos los divisores de un número dado -}
 sumaDivisores :: Integer -> Integer
