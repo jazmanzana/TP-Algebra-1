@@ -6,7 +6,6 @@ import Data.Bits
 
 --(1)
 mcdExt :: Integer -> Integer -> (Integer, (Integer, Integer))
-mcdExt a b | b > a = mcdExt b a
 mcdExt a 0 = (a, (1, 0))
 mcdExt a b = (d, (t, s - t*k))
         where (k, r) = (div a b, mod a b)
@@ -44,33 +43,6 @@ modExp :: Integer -> Integer -> Integer -> Integer
 modExp b 0 m = 1
 modExp b e m = t * modExp ((b * b) `mod` m) (shiftR e 1) m `mod` m
   where t = if testBit e 0 then b `mod` m else 1
-
-
-{- Función dosYNaturalesImparesHastaN
- - Recibe un número `n` y devuelve una lista de números impares menores
- - a `n`, ordenada de forma decreciente, con el 2 al final.
- -}
-dosYNaturalesImparesHastaN :: Integer -> [Integer]
-dosYNaturalesImparesHastaN 2 = 2 : []
-dosYNaturalesImparesHastaN n | esMultiplo n 2 == False = dosYNaturalesImparesHastaN (n - 1) ++ [n]
-                             | otherwise = dosYNaturalesImparesHastaN (n - 1)
-
-{- Función esMultiplo
- - Recibe dos números y devuelve True si el primero es múltiplo del
- - segundo.
- -}
-esMultiplo :: Integer -> Integer -> Bool
-esMultiplo numero multiplo = numero `mod` multiplo == 0
-
-{- Función quitar
- - Dados un elemento y una lista elimina la todas las apariciones del
- - mismo en ella (de haberla).
- -}
-quitar :: Integer -> [Integer] -> [Integer]
-quitar _ [] = []
-quitar x (primerElemento:lista) | x == primerElemento = lista
-                                | otherwise = primerElemento:quitar x lista
-
 
 {- Función sumaDivisores - Devuelve la suma de todos los divisores de un número dado -}
 sumaDivisores :: Integer -> Integer
