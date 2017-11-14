@@ -15,8 +15,8 @@ import RSA
 romper :: Clpub -> Clpri
 romper cPub = (inversoMultiplicativo e phi, n)
             where phi = (p - 1) * (q - 1)
-                  p = fst (head (factorizarEnteros n))
-                  q = snd (head (factorizarEnteros n))
+                  p = fst (head (factorizarPrimos n))
+                  q = snd (head (factorizarPrimos n))
                   e = fst cPub
                   n = snd cPub
 
