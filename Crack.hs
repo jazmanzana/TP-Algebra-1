@@ -31,17 +31,17 @@ espia cPub mensajeCif = decodificador (romper cPub) mensajeCif
  - tales que p · e = n
  -}
 
-factorizarEnteros :: Integer -> Set (Integer, Integer)
-factorizarEnteros n = [(divisor_primo_mas_grande, div n divisor_primo_mas_grande)]
+factorizarPrimos :: Integer -> Set (Integer, Integer)
+factorizarPrimos n = [(divisor_primo_mas_grande, div n divisor_primo_mas_grande)]
        where n_sqrt = floor (sqrt (fromInteger n))
-             divisor_primo_mas_grande = factorizarEnterosAux n_sqrt n
+             divisor_primo_mas_grande = factorizarPrimosAux n_sqrt n
              
 {- Dados dos números naturales, `m` y `n`, revisa todos los enteros menores
  - a `m` y devuelve el primer entero primo, divisor de `n` que encuentre.
  - Si no encentra ninguno, devuelve 1.
  -}
  
-factorizarEnterosAux :: Integer -> Integer -> Integer
-factorizarEnterosAux 1 n = 1
-factorizarEnterosAux m n | (esPrimo m) && (mod n m == 0) = m
-                         | otherwise = factorizarEnterosAux (m-1) n
+factorizarPrimosAux :: Integer -> Integer -> Integer
+factorizarPrimosAux 1 n = 1
+factorizarPrimosAux m n | (esPrimo m) && (mod n m == 0) = m
+                         | otherwise = factorizarPrimosAux (m-1) n

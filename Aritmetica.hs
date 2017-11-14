@@ -69,7 +69,7 @@ esPrimo n = sumaDivisores (abs(n)) == abs(n) + 1
  - Maximo Común Divisor entre dos Integers dados 
  -}
 mcd ::  Integer -> Integer -> Integer
-mcd a 0 = abs a
+mcd a 0 = abs a -- PROBAR CON Y SIN ABS
 mcd a b = mcd b (mod a b)
 
 {- Funcion primerCoprimoDesde 

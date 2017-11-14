@@ -7,7 +7,7 @@ import Aritmetica
 claves :: Integer -> Integer -> (Integer, Integer, Integer)
 claves p q = (e, d, n)
   where n = p*q
-        (e, d) = calcular_e_d ((p-1)*(q-1)) ((p-1)*(q-1)) -- llamo con phi dos veces, una es mi e que le voy restando 1
+        (e, d) = calcular_e_d ((p-1)*(q-1)) ((p-1)*(q-1)) -- llamo con phi dos veces
 
 
 {- Recibe dos números, `f` y φ y devuelve los valores `e`, `d` utilizados
@@ -19,29 +19,32 @@ calcular_e_d f phi | abs (inversoMultiplicativo f phi) /= 1 = (f, inversoMultipl
                    | otherwise = calcular_e_d (f - 1) phi
 
 
-
 --(6)
--- Dada la clave pública y una secuencia de caracteres, la codifica y devuelve la secuencia obtenida.
-codificador :: ClPub -> Mensaje -> Cifrado
-codificador kPublic mensaje | fst(mcdExt snd(kPublic) (aEnteros mensaje)) == 1 = convertirLista (aEnteros mensaje) kPublic 
-							| otherwise = -(aEnteros mensaje)
+-- Dada la clave pública y una secuencia de caracteres, la codifica
+-- caracter a caracter y devuelve la secuencia obtenida.
+codificador :: Clpub -> Mensaje -> Cifrado
+codificador cPub [] = []
+codificador cPub mensajeCh | mcd m n == 1 = (modExp m e n) : codificador cPub (tail mensajeCh)
+                           | otherwise = (-m) : codificador cPub (tail mensajeCh)
+                           where mensajeInt = aEnteros mensajeCh
+                                 m = head mensajeInt
+                                 e = fst cPub
+                                 n = snd cPub
 
 --(7)
 -- Dados una clave privada y un mensaje cifrado devuelve un mensaje
 -- decodificado
-decodificador :: ClPri -> Cifrado -> Mensaje
-decodificador kPriv mCifrado | mCifrado >= 0 = revertirLista mCifrado ClPri
-							 | otherwise = aChars (- mCifrado) 
+decodificador :: Clpri -> Cifrado -> Mensaje
+decodificador cPriv [] = []
+decodificador cPriv mensajeCif = aChars (decodificadorAux cPriv mensajeCif)
 
-							 
--- funcion auxiliar que recibe el mensaje original y devuelve el mensaje cifrado para el primer caso 
-
-convertirLista :: [Integer] -> ClPub -> [Integer]
-convertirLista [] clave = []
-convertirLista lista clave =  modExp (head lista) fst(clave) snd(clave) : convertirLista (tail lista) clave
-
--- funcion auxiliar que recibe el mensaje cifrado y devuelve el mensaje original para el primer caso
-
-revertirLista :: Cifrado -> ClPri -> Mensaje
-revertirLista [] kPriv = []
-revertirLista mCifrado kPriv = modExp (head mCifrado) fst(kPriv) snd(kPriv) : convertirLista (tail mCifrado) kPriv
+{- Dados una clave privada y un mensaje cifrado devuelve una lista de
+ - Integers decodificados
+ -}
+decodificadorAux :: Clpri -> Cifrado -> [Integer]
+decodificadorAux cPriv [] = []
+decodificadorAux cPriv mensajeCif | c >= 0 = (modExp c d n) : decodificadorAux cPriv (tail mensajeCif)
+                                  | otherwise = (-c) : decodificadorAux cPriv (tail mensajeCif)
+                                  where c = head mensajeCif
+                                        d = fst cPriv
+                                        n = snd cPriv
