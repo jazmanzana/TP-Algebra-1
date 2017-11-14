@@ -41,7 +41,7 @@ factorizarEnteros n = [(divisor_primo_mas_grande, div n divisor_primo_mas_grande
  - Si no encentra ninguno, devuelve 1.
  -}
  
- factorizarEnterosAux :: Integer -> Integer -> Integer
- factorizarEnterosAux 1 n = 1
- factorizarEnterosAux m n | (esPrimo m) && (mod n m == 0) = m
-                          | otherwise = factorizarEnterosAux (m-1) n
+factorizarEnterosAux :: Integer -> Integer -> Integer
+factorizarEnterosAux 1 n = 1
+factorizarEnterosAux m n | (esPrimo m) && (mod n m == 0) = m
+                         | otherwise = factorizarEnterosAux (m-1) n
