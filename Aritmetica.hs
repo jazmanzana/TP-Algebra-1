@@ -1,3 +1,9 @@
+{- Integrantes del grupo
+ - Laur, Juan Lucas (Número de libreta: 657/17)
+ - Aranda, Agustín (Número de libreta: 730/17)
+ - Gómez, Mercedes Jazmín (Número de libreta: 143/11)
+ -}
+
 module Aritmetica where
 import Catedra
 import Data.Tuple
@@ -69,7 +75,7 @@ esPrimo n = sumaDivisores (abs(n)) == abs(n) + 1
  - Maximo Común Divisor entre dos Integers dados 
  -}
 mcd ::  Integer -> Integer -> Integer
-mcd a 0 = abs a -- PROBAR CON Y SIN ABS
+mcd a 0 = abs a
 mcd a b = mcd b (mod a b)
 
 {- Funcion primerCoprimoDesde 

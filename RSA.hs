@@ -1,3 +1,9 @@
+{- Integrantes del grupo
+ - Laur, Juan Lucas (Número de libreta: 657/17)
+ - Aranda, Agustín (Número de libreta: 730/17)
+ - Gómez, Mercedes Jazmín (Número de libreta: 143/11)
+ -}
+
 module RSA where
 import Catedra
 import Aritmetica
