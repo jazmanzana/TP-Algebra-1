@@ -30,31 +30,18 @@ espia cPub mensajeCif = decodificador (romper cPub) mensajeCif
 {- Dado un número entero mayor a `n`, devuelve un par de números (p, e),
  - tales que p · e = n
  -}
+
 factorizarEnteros :: Integer -> Set (Integer, Integer)
-factorizarEnteros n = [(pollard n, div n (pollard n))]
-
-factorizarEnterosAux :: [Integer] -> Integer -> [Integer]
-factorizarEnterosAux _ 0 = []
-factorizarEnterosAux [] _ = []
-factorizarEnterosAux primos n | mod n (head primos) == 0 = (head primos) : factorizarEnterosAux primos (div n (head primos))
-                              | otherwise = factorizarEnterosAux (tail primos) n
-
-
-{- Dado un número entero `n`, devuelve otro número entero `d`, tal que
- - `d` es factor primo de `n`
+factorizarEnteros n = [(divisor_primo_mas_grande, div n divisor_primo_mas_grande)]
+       where n_sqrt = floor (sqrt (fromInteger n))
+             divisor_primo_mas_grande = factorizarEnterosAux n_sqrt n
+             
+{- Dados dos números naturales, `m` y `n`, revisa todos los enteros menores
+ - a `m` y devuelve el primer entero primo, divisor de `n` que encuentre.
+ - Si no encentra ninguno, devuelve 1.
  -}
-pollard :: Integer -> Integer
-pollard n = pollardAux n x y 1
-          where x = (g_random 2 n)
-                y = (g_random (g_random 2 n) n)
-                d = (mcd (abs (x - y)) n)
-
-pollardAux :: Integer -> Integer -> Integer -> Integer -> Integer
-pollardAux n x y d | d == 1 = pollardAux n (g_random x n) (g_random (g_random y n) n) (mcd (abs (x - y)) n)
-                   | d == n = 0
-                   | otherwise = d
-
-{- Función pseudoaleatoria
- -}
-g_random :: Integer -> Integer -> Integer
-g_random x n = mod (x^2 + 1) n
+ 
+ factorizarEnterosAux :: Integer -> Integer -> Integer
+ factorizarEnterosAux 1 n = 1
+ factorizarEnterosAux m n | (esPrimo m) && (mod n m == 0) = m
+                          | otherwise = factorizarEnterosAux (m-1) n
