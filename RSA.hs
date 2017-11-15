@@ -13,7 +13,7 @@ import Aritmetica
 claves :: Integer -> Integer -> (Integer, Integer, Integer)
 claves p q = (e, d, n)
   where n = p*q
-        (e, d) = calcular_e_d ((p-1)*(q-1)) ((p-1)*(q-1)) -- llamo con phi dos veces
+        (e, d) = calcular_e_d ((p-1)*(q-1)-1) ((p-1)*(q-1)) -- llamo con phi dos veces
 
 
 {- Recibe dos números, `f` y φ y devuelve los valores `e`, `d` utilizados

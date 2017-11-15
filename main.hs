@@ -29,9 +29,9 @@ magiaPura (x:xs) = res : magiaPura xs
     dbg = "[DBG] Mis claves son " ++ show (e,d,n) ++ "\n[DBG] Mis primos " ++ show (p,q) ++ "\n"
     (p, q) = elegidor  $ criba 5000
     (e, d, n) = claves p q
-    cif = codificador (d,n) x
-    msg = decodificador (e,n) cif
-    esp = espia (d,n) cif
+    cif = codificador (e,n) x
+    msg = decodificador (d,n) cif
+    esp = espia (e,n) cif
 
 
 elegidor :: Set Integer -> (Integer, Integer)
