@@ -39,8 +39,9 @@ coprimoCon x = primerCoprimoDesde n (n - 2)
 -- Dados dos números `n` y `m`, otorga el inverso multiplicativo de
 -- `n` módulo `m`
 inversoMultiplicativo :: Integer -> Integer -> Integer
-inversoMultiplicativo a b = s
-                           where (g, (s, t)) = mcdExt a b
+inversoMultiplicativo m n | g == 1 = n + fst tupla_s_t
+                          | otherwise = fst tupla_s_t
+                          where (g, tupla_s_t) = mcdExt m n
 
 
 
