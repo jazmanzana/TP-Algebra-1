@@ -1,8 +1,3 @@
-{- Integrantes del grupo
- - Laur, Juan Lucas (Número de libreta: 657/17)
- - Aranda, Agustín (Número de libreta: 730/17)
- - Gómez, Mercedes Jazmín (Número de libreta: 143/11)
- -}
 
 module Aritmetica where
 import Catedra
@@ -13,9 +8,9 @@ import Data.Bits
 --(1)
 mcdExt :: Integer -> Integer -> (Integer, (Integer, Integer))
 mcdExt a 0 = (a, (1, 0))
-mcdExt a b = (d, (t, s - t*k))
-        where (k, r) = (div a b, mod a b)
-              (d, (s, t)) = mcdExt b r
+mcdExt a b = (m, (t, s - t*q))
+        where (q, r) = (div a b, mod a b)
+              (m, (s, t)) = mcdExt b r
 
 --(2)
 -- Dado un entero, devuelve un conjunto con todos los números primos
